@@ -156,13 +156,19 @@
   gap: var(--sp-lg) var(--sp-md);
 }
 
-/* ─── Card ─── */
+/* ─── Card — CSS-animated entrance (no GSAP, avoids React DOM conflict) ─── */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(36px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
 .card {
   display: flex;
   flex-direction: column;
   gap: var(--sp-sm);
   color: var(--ink);
   cursor: pointer;
+  animation: cardIn 0.65s cubic-bezier(0.16,1,0.3,1) both;
 }
 
 .imgBox {

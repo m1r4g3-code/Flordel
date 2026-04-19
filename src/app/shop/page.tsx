@@ -4,61 +4,44 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowUpRight } from "lucide-react";
 import styles from "./page.module.css";
 
 const CATEGORIES = ["All", "Bouquets", "Roses", "Seasonal", "Plants", "Occasions"];
 
 const products = [
-  { id: 1,  title: "Designer's Choice",         desc: "Curated by our florists daily",        price: "From $85",  image: "/images/designers_choice.png", slug: "designers-choice",        cat: "Bouquets",   tag: "Bestseller" },
-  { id: 2,  title: "Mirror Bouquet",             desc: "Sculptural stems, gallery-worthy",     price: "From $120", image: "/images/mirror_bouquet.png",   slug: "mirror-flower-bouquet",   cat: "Bouquets",   tag: "Signature"  },
-  { id: 3,  title: "Flordel Special",            desc: "Our most iconic arrangement",          price: "From $150", image: "/images/flordel_special.png",  slug: "flordel-special-bouquet", cat: "Bouquets",   tag: "Exclusive"  },
-  { id: 4,  title: "White Orchid Plant",         desc: "Elegant long-lasting botanicals",      price: "$95",       image: "/images/designers_choice.png", slug: "white-orchid-plant",      cat: "Plants",     tag: null         },
-  { id: 5,  title: "Lush Greenery",              desc: "Modern sculptural foliage",            price: "$110",      image: "/images/flordel_special.png",  slug: "lush-greenery",           cat: "Plants",     tag: null         },
-  { id: 6,  title: "Pastel Dream Bouquet",       desc: "Soft tones, effortlessly graceful",   price: "$130",      image: "/images/mirror_bouquet.png",   slug: "pastel-dream",            cat: "Seasonal",   tag: "New"        },
-  { id: 7,  title: "Garden Rose Collection",     desc: "Rare varieties, hand-sourced",         price: "From $95",  image: "/images/designers_choice.png", slug: "garden-roses",            cat: "Roses",      tag: null         },
-  { id: 8,  title: "Romance Bouquet",            desc: "For love, birthdays & beyond",         price: "From $115", image: "/images/flordel_special.png",  slug: "romance-bouquet",         cat: "Occasions",  tag: null         },
-  { id: 9,  title: "Sympathy Arrangement",       desc: "Thoughtful, tasteful, timeless",       price: "From $140", image: "/images/mirror_bouquet.png",   slug: "sympathy",                cat: "Occasions",  tag: null         },
+  { id: 1,  title: "Designer's Choice",     desc: "Curated by our florists daily",       price: "From $85",  image: "/images/designers_choice.png", slug: "designers-choice",        cat: "Bouquets",  tag: "Bestseller" },
+  { id: 2,  title: "Mirror Bouquet",         desc: "Sculptural stems, gallery-worthy",    price: "From $120", image: "/images/mirror_bouquet.png",   slug: "mirror-flower-bouquet",   cat: "Bouquets",  tag: "Signature"  },
+  { id: 3,  title: "Flordel Special",        desc: "Our most iconic arrangement",         price: "From $150", image: "/images/flordel_special.png",  slug: "flordel-special-bouquet", cat: "Bouquets",  tag: "Exclusive"  },
+  { id: 4,  title: "White Orchid Plant",     desc: "Elegant long-lasting botanicals",     price: "$95",       image: "/images/designers_choice.png", slug: "white-orchid-plant",      cat: "Plants",    tag: null         },
+  { id: 5,  title: "Lush Greenery",          desc: "Modern sculptural foliage",           price: "$110",      image: "/images/flordel_special.png",  slug: "lush-greenery",           cat: "Plants",    tag: null         },
+  { id: 6,  title: "Pastel Dream Bouquet",   desc: "Soft tones, effortlessly graceful",  price: "$130",      image: "/images/mirror_bouquet.png",   slug: "pastel-dream",            cat: "Seasonal",  tag: "New"        },
+  { id: 7,  title: "Garden Rose Collection", desc: "Rare varieties, hand-sourced",        price: "From $95",  image: "/images/designers_choice.png", slug: "garden-roses",            cat: "Roses",     tag: null         },
+  { id: 8,  title: "Romance Bouquet",        desc: "For love, birthdays & beyond",        price: "From $115", image: "/images/flordel_special.png",  slug: "romance-bouquet",         cat: "Occasions", tag: null         },
+  { id: 9,  title: "Sympathy Arrangement",   desc: "Thoughtful, tasteful, timeless",      price: "From $140", image: "/images/mirror_bouquet.png",   slug: "sympathy",                cat: "Occasions", tag: null         },
 ];
+
 
 export default function ShopPage() {
   const [active, setActive] = useState("All");
-  const gridRef  = useRef<HTMLDivElement>(null);
   const heroRef  = useRef<HTMLDivElement>(null);
 
   const filtered = active === "All" ? products : products.filter(p => p.cat === active);
 
-  // Hero text reveal
+  // Hero text entrance — runs once on mount only
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     if (!heroRef.current) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".shopHeroLine",
-        { y: "100%", opacity: 0 },
-        { y: "0%", opacity: 1, stagger: 0.12, duration: 1.1, ease: "power3.out", delay: 0.2 }
-      );
-    }, heroRef);
-    return () => ctx.revert();
+    const lines = heroRef.current.querySelectorAll<HTMLElement>(".shopHeroLine");
+    gsap.fromTo(lines,
+      { y: "110%", opacity: 0 },
+      { y: "0%", opacity: 1, stagger: 0.12, duration: 1.1, ease: "power3.out", delay: 0.2 }
+    );
   }, []);
-
-  // Grid reveal on filter change
-  useEffect(() => {
-    if (!gridRef.current) return;
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(`.${styles.card}`);
-      gsap.fromTo(cards,
-        { opacity: 0, y: 48, scale: 0.97 },
-        { opacity: 1, y: 0, scale: 1, stagger: 0.07, duration: 0.75, ease: "power3.out" }
-      );
-    }, gridRef);
-    return () => ctx.revert();
-  }, [active]);
 
   return (
     <div className={styles.page}>
 
-      {/* ─── Hero Banner ─── */}
+      {/* ─── Hero ─── */}
       <div className={styles.hero} ref={heroRef}>
         <div className={styles.heroBg}>
           <Image src="/images/hero_user.jpg" alt="Flordel Shop" fill priority quality={90} className={styles.heroBgImg} />
@@ -67,8 +50,8 @@ export default function ShopPage() {
         <div className={`container ${styles.heroContent}`}>
           <p className={styles.heroEye}>78 Clinton St, New York · Same-Day Delivery</p>
           <h1 className={styles.heroTitle}>
-            <span className="shopHeroLine" style={{ display: "block" }}>All</span>
-            <span className="shopHeroLine" style={{ display: "block", fontStyle: "italic" }}>Arrangements</span>
+            <span className="shopHeroLine" style={{ display: "block", overflow: "hidden" }}>All</span>
+            <span className="shopHeroLine" style={{ display: "block", overflow: "hidden", fontStyle: "italic" }}>Arrangements</span>
           </h1>
           <p className={`shopHeroLine ${styles.heroSub}`}>
             {products.length} curated selections, each one handcrafted.
@@ -87,7 +70,6 @@ export default function ShopPage() {
                 onClick={() => setActive(cat)}
               >
                 {cat}
-                {active === cat && <span className={styles.filterDot} />}
               </button>
             ))}
           </div>
@@ -95,11 +77,17 @@ export default function ShopPage() {
         </div>
       </div>
 
-      {/* ─── Product Grid ─── */}
+      {/* ─── Product Grid ─── 
+          Key on active forces full remount — avoids GSAP/React DOM conflict entirely */}
       <div className={`container ${styles.gridWrap}`}>
-        <div className={styles.grid} ref={gridRef}>
-          {filtered.map((p) => (
-            <Link href={`/shop/${p.slug}`} key={p.id} className={styles.card}>
+        <div className={styles.grid} key={active}>
+          {filtered.map((p, i) => (
+            <Link
+              href={`/shop/${p.slug}`}
+              key={p.id}
+              className={styles.card}
+              style={{ animationDelay: `${i * 0.07}s` }}
+            >
               <div className={styles.imgBox}>
                 {p.tag && <span className={styles.pill}>{p.tag}</span>}
                 <Image
@@ -108,7 +96,9 @@ export default function ShopPage() {
                   sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
                 />
                 <div className={styles.imgOverlay}>
-                  <span className={styles.quickView}>Quick View <ArrowUpRight size={13} strokeWidth={1.5} /></span>
+                  <span className={styles.quickView}>
+                    View <ArrowUpRight size={12} strokeWidth={1.5} />
+                  </span>
                 </div>
               </div>
               <div className={styles.meta}>
@@ -122,7 +112,6 @@ export default function ShopPage() {
           ))}
         </div>
 
-        {/* No results */}
         {filtered.length === 0 && (
           <div className={styles.empty}>
             <p>No arrangements in this category yet.</p>
@@ -130,7 +119,7 @@ export default function ShopPage() {
         )}
       </div>
 
-      {/* ─── Bottom CTA strip ─── */}
+      {/* ─── Bottom CTA ─── */}
       <div className={styles.ctaStrip}>
         <div className={`container ${styles.ctaInner}`}>
           <div>

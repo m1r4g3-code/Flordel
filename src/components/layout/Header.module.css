@@ -7,17 +7,37 @@
   display: flex;
   align-items: center;
   padding: 0 var(--sp-md);
-  transition: background 0.4s ease, border-color 0.4s ease;
+  /* Transition all text colour properties too */
+  transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
   border-bottom: 1px solid transparent;
 }
 
+/* ── Un-scrolled: site is on dark hero — use ivory ── */
+.logo,
+.link,
+.iconBtn {
+  color: rgba(249, 248, 246, 0.9);
+  transition: color 0.4s ease, opacity 0.2s ease;
+}
+.link:hover  { color: rgba(249,248,246,0.55); }
+.iconBtn:hover { color: rgba(249,248,246,0.55); }
+
+/* ── Scrolled: frosted ivory glass — switch to ink ── */
 .header.scrolled {
-  background: rgba(249, 248, 246, 0.9);
+  background: rgba(249, 248, 246, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom-color: var(--line);
 }
+.header.scrolled .logo,
+.header.scrolled .link,
+.header.scrolled .iconBtn {
+  color: var(--ink);
+}
+.header.scrolled .link:hover  { color: var(--mid); }
+.header.scrolled .iconBtn:hover { color: var(--mid); }
 
+/* ── Layout ── */
 .inner {
   width: 100%;
   max-width: var(--max-w);
@@ -33,7 +53,6 @@
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: var(--ink);
   justify-self: center;
 }
 
@@ -46,14 +65,9 @@
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-weight: 500;
-  color: var(--ink);
-  transition: color 0.2s;
 }
-.link:hover { color: var(--mid); }
 
 .iconBtn {
   background: none; border: none; cursor: pointer;
-  color: var(--ink); display: flex; align-items: center;
-  transition: color 0.2s;
+  display: flex; align-items: center;
 }
-.iconBtn:hover { color: var(--mid); }
