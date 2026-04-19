@@ -1,0 +1,137 @@
+.page {
+  padding-top: calc(var(--header-height) + var(--space-xl));
+  padding-bottom: var(--space-xl);
+  min-height: 100vh;
+  background-color: var(--color-cream);
+}
+
+.header {
+  margin-bottom: var(--space-xl);
+  text-align: center;
+  max-width: 600px;
+}
+
+.title {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 1;
+  margin-bottom: var(--space-md);
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.card {
+  position: relative;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+.popular {
+  transform: scale(1.05);
+  border: 1px solid var(--color-forest-green);
+  box-shadow: 0 20px 40px rgba(45, 74, 62, 0.1);
+  z-index: 1;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-forest-green);
+  color: var(--color-cream);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-sans);
+  white-space: nowrap;
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.planName {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  color: var(--color-forest-green);
+  line-height: 1;
+}
+
+.frequency {
+  font-family: var(--font-sans);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+}
+
+.features {
+  flex: 1;
+  margin-bottom: var(--space-lg);
+}
+
+.features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-sans);
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.checkIcon {
+  color: var(--color-forest-green);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.btn {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .popular {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}

@@ -1,0 +1,325 @@
+.page {
+  min-height: 100vh;
+  background: var(--ivory);
+}
+
+/* ════════════════════════════════════
+   HERO
+════════════════════════════════════ */
+.hero {
+  position: relative;
+  height: 72vh;
+  min-height: 500px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.heroBgImg {
+  object-fit: cover;
+  object-position: center 40%;
+}
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20,18,16,0.2)  0%,
+    rgba(20,18,16,0.15) 40%,
+    rgba(20,18,16,0.75) 85%,
+    rgba(20,18,16,1.0)  100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  padding-bottom: var(--sp-xl);
+}
+
+.heroEye {
+  font-family: var(--font-b);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(249,248,246,0.55);
+  margin-bottom: 1.25rem;
+}
+
+.heroTitle {
+  font-family: var(--font-h);
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--ivory);
+  margin-bottom: var(--sp-md);
+  overflow: hidden;
+}
+
+.heroSub {
+  font-family: var(--font-b);
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(249,248,246,0.55);
+  letter-spacing: 0.02em;
+}
+
+/* ════════════════════════════════════
+   FILTER BAR
+════════════════════════════════════ */
+.filterWrap {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 50;
+  background: rgba(249,248,246,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+
+.filterInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
+
+.filters {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.filters::-webkit-scrollbar { display: none; }
+
+.filterBtn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-b);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--mid);
+  padding: 0.5rem 1.25rem;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.filterBtn:hover { color: var(--ink); }
+
+.filterActive {
+  color: var(--ink);
+  font-weight: 500;
+}
+.filterActive::after {
+  content: "";
+  position: absolute;
+  bottom: -0.875rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.filterDot { display: none; }
+
+.count {
+  font-family: var(--font-b);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--mid);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════
+   GRID
+════════════════════════════════════ */
+.gridWrap {
+  padding: var(--sp-xl) 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-lg) var(--sp-md);
+}
+
+/* ─── Card ─── */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.imgBox {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--line);
+}
+
+.pill {
+  position: absolute;
+  top: 14px; left: 14px;
+  z-index: 3;
+  font-family: var(--font-b);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(249,248,246,0.92);
+  color: var(--ink);
+  padding: 5px 12px;
+  border-radius: var(--r-full);
+}
+
+.img {
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  z-index: 1;
+}
+.card:hover .img { transform: scale(1.05); }
+
+/* Hover overlay with quick view */
+.imgOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(20,18,16,0.35);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: var(--sp-md);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.card:hover .imgOverlay { opacity: 1; }
+
+.quickView {
+  font-family: var(--font-b);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--ivory);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-bottom: 1px solid rgba(249,248,246,0.5);
+  padding-bottom: 2px;
+}
+
+/* Meta */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 2px;
+  gap: var(--sp-sm);
+}
+
+.name {
+  font-family: var(--font-h);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.desc {
+  font-family: var(--font-b);
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--mid);
+}
+
+.price {
+  font-family: var(--font-b);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Empty state */
+.empty {
+  text-align: center;
+  padding: var(--sp-xl) 0;
+  font-family: var(--font-b);
+  font-size: 1rem;
+  color: var(--mid);
+}
+
+/* ════════════════════════════════════
+   BOTTOM CTA STRIP
+════════════════════════════════════ */
+.ctaStrip {
+  background: var(--ink);
+  padding: var(--sp-lg) 0;
+}
+
+.ctaInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+@media (max-width: 640px) {
+  .ctaInner { flex-direction: column; align-items: flex-start; }
+}
+
+.ctaTitle {
+  font-family: var(--font-h);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ivory);
+  margin-bottom: 6px;
+}
+
+.ctaSub {
+  font-family: var(--font-b);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: rgba(249,248,246,0.5);
+}
+
+.ctaBtn {
+  background: var(--ivory) !important;
+  color: var(--ink) !important;
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  padding: 1rem 2rem;
+}
+.ctaBtn:hover {
+  background: rgba(249,248,246,0.85) !important;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .heroTitle { font-size: clamp(3.5rem, 14vw, 5rem); }
+}

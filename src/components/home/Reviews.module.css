@@ -1,0 +1,86 @@
+/* Reviews: dark (ink) surface — one colour flip, zero chaos */
+.section {
+  background: var(--ink);
+  color: var(--ivory);
+  overflow: hidden;
+}
+
+.topBar {
+  padding: var(--sp-lg) 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+@media (max-width:600px) { .topBar { flex-direction:column; align-items:flex-start; gap:var(--sp-md); } }
+
+.eyebrow {
+  /* On dark ink background — override global .label ink color to ivory */
+  color: rgba(249,248,246,0.45) !important;
+  opacity: 1 !important;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-family: var(--font-h);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: var(--ivory);
+  line-height: 1;
+}
+.title em { font-style: italic; color: rgba(249,248,246,0.45); }
+
+.rating { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+.stars  { display:flex; gap:3px; color: var(--ivory); }
+.ratingLabel {
+  font-family: var(--font-b);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: rgba(249,248,246,0.35);
+}
+
+/* ─── Horizontal track ─── */
+.track {
+  display: flex;
+  width: max-content;
+  padding: var(--sp-xl) 0;
+  padding-left: max(var(--sp-md), calc((100vw - var(--max-w))/2 + var(--sp-md)));
+}
+
+.card {
+  width: min(660px, 82vw);
+  padding-right: var(--sp-xl);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sp-lg);
+  will-change: opacity;
+}
+
+.quote {
+  font-family: var(--font-h);
+  font-size: clamp(1.625rem, 3vw, 2.625rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.25;
+  /* Always full ivory — dimming is handled by parent .card opacity */
+  color: var(--ivory);
+}
+
+.attr { display:flex; flex-direction:column; gap:4px; }
+.author {
+  font-family: var(--font-b);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(249,248,246,0.8);
+}
+.loc {
+  font-family: var(--font-b);
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(249,248,246,0.3);
+}
