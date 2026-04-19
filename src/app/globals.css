@@ -29,6 +29,17 @@
   --max-w: 1440px;
 }
 
+/* ─── Mobile Spacing Adjustments ─── */
+@media (max-width: 768px) {
+  :root {
+    --sp-md:  1.5rem;
+    --sp-lg:  2.5rem;
+    --sp-xl:  4rem;
+    --sp-2xl: 6rem;
+    --header-height: 56px;
+  }
+}
+
 /* ─── Reset ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: auto; }

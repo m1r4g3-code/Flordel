@@ -64,7 +64,7 @@
 /* Main headline — full bright ivory */
 .headline {
   font-family: var(--font-h);
-  font-size: clamp(3.5rem, 9vw, 8.5rem);
+  font-size: clamp(2.5rem, 9vw, 8.5rem);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: -0.025em;
@@ -144,4 +144,12 @@
 @keyframes pulse {
   0%,100% { opacity: 0.2; }
   50%      { opacity: 0.9; }
+}
+
+/* ─── Responsive Mobile ─── */
+@media (max-width: 600px) {
+  .actions {
+    flex-direction: column;
+    gap: var(--sp-sm);
+  }
 }
